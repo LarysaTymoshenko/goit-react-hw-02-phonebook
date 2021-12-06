@@ -17,12 +17,14 @@ export default class Form extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.onSubmit(this.state.name, this.state.number);
-    // this.formReset()
-    // console.log(this);
+    this.reset();
+  };
+  reset = () => {
+    this.setState({ name: '', number: '' });
   };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className={s.form}>
         <label htmlFor="name" className={s.label}>
           NAME
           <input
@@ -50,7 +52,10 @@ export default class Form extends Component {
             onChange={this.handleInput}
           />
         </label>
-        <button type="submit"> Add contact</button>
+        <button type="submit" className={s.button}>
+          {' '}
+          Add contact
+        </button>
       </form>
     );
   }
@@ -59,4 +64,5 @@ export default class Form extends Component {
 Form.protoType = {
   name: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
+  onAddContact: PropTypes.func.isRequired,
 };
